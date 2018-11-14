@@ -5,6 +5,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Recurso(models.Model):
+
+    DESARROLLADOR = 'DE'
+    LIDER_PROYECTO = 'LP'
+
+    ESPECIALIDADES = (
+        (DESARROLLADOR, 'Desarrollador'),
+        (LIDER_PROYECTO, 'Lider de proyecto')
+    )
+
+    user = models.OneToOneField(User)
+    especialidad = models.CharField(max_length=100, choices=ESPECIALIDADES)
+
+    def __unicode__(self):
+        return self.user.first_name + " " + self.user.last_name
+
+
 class Proyecto(models.Model):
 
     EN_PROGRESO = 'EP'
@@ -13,7 +30,7 @@ class Proyecto(models.Model):
 
 
     ESTADOS = (
-        (EN_PROGRESO, 'En_proceso'),
+        (EN_PROGRESO, 'En proceso'),
         (CANCELADO, 'Pausado'),
         (FINALIZADO, 'Finalizado'),
     )
@@ -25,6 +42,9 @@ class Proyecto(models.Model):
     presupuesto = models.IntegerField()
     estado = models.CharField(max_length=2, choices=ESTADOS, default=EN_PROGRESO)
 
+    def __unicode__(self):
+        return self.nombre
+
 
 class Tarea(models.Model):
 
@@ -35,7 +55,7 @@ class Tarea(models.Model):
 
     ESTADOS = (
         (PENDIENTE, 'Pendiente'),
-        (EN_PROGRESO, 'En_progreso'),
+        (EN_PROGRESO, 'En progreso'),
         (RESUELTA, 'Resuelta'),
         (ANULADA, 'Anulada')
     )
@@ -53,7 +73,7 @@ class Tarea(models.Model):
     )
 
     titulo = models.CharField(max_length=60)
-    recurso = models.ForeignKey(User, null=True)
+    recurso = models.ForeignKey(Recurso, null=True)
     proyecto = models.ForeignKey(Proyecto, null=True)
     detalle = models.CharField(max_length=5000)
     fecha_creacion = models.DateField(auto_now_add=True)
