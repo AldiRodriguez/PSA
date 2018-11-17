@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+{% block title %}Recursos{% endblock %}
+
+{% block content %}
+<ul>
+    {% for recurso in recursos %}
+    <li>{{ recurso }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

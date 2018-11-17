@@ -1,0 +1,18 @@
+{% load static %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | PSA</title>
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "backoffice.css" %}">
+    {% block header_styles %}{% endblock header_styles %}
+</head>
+<body>
+    {% block body %}{% endblock body %}
+    {% bootstrap_javascript jquery=1 %}
+    {% block footer_scripts %}{% endblock footer_scripts %}
+</body>
+</html>

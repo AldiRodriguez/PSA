@@ -1,29 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from rest_framework.views import APIView
 from rest_framework import viewsets
-from django.shortcuts import render
-from django.contrib.auth.models import User
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.response import Response
 
-from serializers import ProyectoSerializer, TareaSerializer, UserSerializer, RecursoSerializer
-from models import Proyecto, Tarea, Recurso
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+from . import recursos
+from serializers import RecursoSerializer
 
 
-class RecursoViewSet(viewsets.ModelViewSet):
-    queryset = Recurso.objects.all()
+class RecursoViewSet(viewsets.ViewSet):
+
     serializer_class = RecursoSerializer
 
-
-class ProyectoViewSet(viewsets.ModelViewSet):
-    queryset = Proyecto.objects.all()
-    serializer_class = ProyectoSerializer
-
-
-class TareaViewSet(viewsets.ModelViewSet):
-    queryset = Tarea.objects.all()
-    serializer_class = TareaSerializer
+    def list(self, request):
+        serializer = RecursoSerializer(
+            instance=recursos.values(), many=True
+        )
+        return Response(serializer.data)
