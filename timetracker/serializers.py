@@ -31,17 +31,17 @@ class TareaSerializer(serializers.Serializer):
     ESTADOS = ['Anulada', 'Resuelta', 'En progreso', 'Pendiente']
     PRIORIDADES = ['Bloqueante', 'Alta', 'Media', 'Baja']
 
-    id = serializers.IntegerField(read_only=True)
-    titulo = serializers.CharField(max_length=60)
-    proyecto = ProyectoSerializer()
-    detalle = serializers.CharField(max_length=5000)
-    fecha_creacion = serializers.DateTimeField()
-    fecha_inicio = serializers.DateTimeField()
-    fecha_fin = serializers.DateTimeField()
-    estimacion = serializers.IntegerField()
-    horas_trabajadas = serializers.IntegerField()
-    prioridad = serializers.ChoiceField(choices=PRIORIDADES)
-    estado = serializers.ChoiceField(choices=ESTADOS)
+    id = serializers.IntegerField(read_only=True, required=False)
+    titulo = serializers.CharField(max_length=60, required=False)
+    proyecto = ProyectoSerializer(required=False)
+    detalle = serializers.CharField(max_length=5000, required=False)
+    fecha_creacion = serializers.DateTimeField(required=False)
+    fecha_inicio = serializers.DateTimeField(required=False)
+    fecha_fin = serializers.DateTimeField(required=False)
+    estimacion = serializers.IntegerField(required=False)
+    horas_trabajadas = serializers.IntegerField(required=False)
+    prioridad = serializers.ChoiceField(choices=PRIORIDADES, required=False)
+    estado = serializers.ChoiceField(choices=ESTADOS, required=False)
 
     def create(self, validated_data):
         return Tarea(id=None, **validated_data)
