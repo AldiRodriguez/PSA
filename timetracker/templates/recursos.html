@@ -2,13 +2,13 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-
-{% block title %}Recursos{% endblock %}
-
 {% block content %}
-<ul>
+    <h2> Recursos </h2>
+    <ul>
     {% for recurso in recursos %}
-    <li>{{ recurso }}</li>
+    <li>
+        <a href="{% url 'recursos-detail' recurso.id%}">{{ recurso.nombre }} {{ recurso.apellido }}</a>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

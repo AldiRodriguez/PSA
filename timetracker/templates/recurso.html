@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block page_title %}Bienvenido, {{ recurso.nombre }} {{ recurso.apellido }}{% endblock %}
+
+{% block content %}
+    <h2> Tareas </h2>
+    <ul>
+    {% for tarea in tareas %}
+    <li>
+        <a href="{% url 'tarea' tarea.id%}">{{ tarea.titulo }} - Proyecto: {{ tarea.proyecto.nombre }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

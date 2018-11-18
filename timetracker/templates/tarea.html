@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load rest_framework %}
+
+{% block page_title %}Tareas{% endblock %}
+
+{% block content %}
+    <h2>{{ tarea.id }} - {{ tarea.proyecto.nombre }}</h2>
+    <div class="well">
+      <dl class="dl-horizontal m-b-0">
+        <dt>Fecha creacion</dt>
+        <dd>{{ tarea.fecha_creacion }}</dd>
+        <dt>Responsable</dt>
+        <dd>Aldana</dd>
+        <dt>Estado</dt>
+        <dd>{{ tarea.estado }}</dd>
+        <dt>Prioridad</dt>
+        <dd>{{ tarea.prioridad }}</dd>
+        <dt>Estimacion</dt>
+        <dd>{{ tarea.estimacion }}</dd>
+        <dt>Horaa trabajadas</dt>
+        <dd>{{ tarea.horas_trabajadas }}</dd>
+
+      </dl>
+    </div>
+    <!-- Small modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm">Cargar Horas</button>
+
+    <div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="creditModal">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Horas trabajadas</h4>
+          </div>
+            <div class="modal-body">
+                <form action="{% url 'tarea' tarea.id %}" method="POST" class="form" name="cargaHorasForm" id="cargaHorasForm">
+                  {% render_form serializer %}
+                </form>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" form="cargaHorasForm" class="btn btn-primary">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

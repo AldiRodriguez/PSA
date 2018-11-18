@@ -1,10 +1,12 @@
-from django.conf.urls import include, url
+from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 
-from views import RecursoViewSet, TareaViewSet
+from views import RecursoViewSet, TareaDetailView
 
 router = DefaultRouter()
 router.register(r'recursos', RecursoViewSet, basename='recursos')
-router.register(r'tareas', TareaViewSet, basename='tareas')
 
-urlpatterns = router.urls
+urlpatterns = [
+    url(r'^tareas/(?P<pk>\d+)$', TareaDetailView.as_view(), name='tarea'),
+]
+urlpatterns += router.urls

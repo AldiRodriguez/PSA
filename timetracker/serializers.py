@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-
 from rest_framework import serializers
 
 from models import Proyecto, Tarea, Recurso
@@ -47,8 +45,10 @@ class TareaSerializer(serializers.Serializer):
         return Tarea(id=None, **validated_data)
 
     def update(self, instance, validated_data):
-        for field, value in validated_data.items():
-            setattr(instance, field, value)
+        if not instance.horas_trabajadas:
+            instance.horas_trabajadas = validated_data['horas_trabajadas']
+        else:
+            instance.horas_trabajadas += validated_data['horas_trabajadas']
         return instance
 
 
@@ -68,3 +68,7 @@ class RecursoSerializer(serializers.Serializer):
         for field, value in validated_data.items():
             setattr(instance, field, value)
         return instance
+
+
+class CargaHorasSerializer(serializers.Serializer):
+    horas_trabajadas = serializers.IntegerField()
