@@ -12,7 +12,7 @@
     <ul>
     {% for tarea in tareas %}
     <li>
-        <a href="{% url 'tarea' tarea.id%}">{{ tarea.titulo }} - Proyecto: {{ tarea.proyecto.nombre }}</a>
+        <a href="{% url 'tarea' recurso.id tarea.id %}">{{ tarea.titulo }} - Proyecto: {{ tarea.proyecto.nombre }}</a>
     </li>
     {% endfor %}
 </ul>

@@ -31,28 +31,29 @@ class RecursoViewSet(viewsets.ViewSet):
 class TareaDetailView(APIView):
     renderer_classes = [TemplateHTMLRenderer]
 
-    def get_data(self, tarea):
-        serializer = TareaSerializer(instance=tarea)
+    def get_data(self, tarea, recurso):
+        tarea_serializer = TareaSerializer(instance=tarea)
+        recurso_serializer = RecursoSerializer(recurso)
         carga_horas = CargaHorasSerializer(instance=tarea)
-        return {'tarea': serializer.data, 'serializer': carga_horas}
+        return {'tarea': tarea_serializer.data, 'recurso': recurso_serializer.data, 'serializer': carga_horas}
 
-    def get(self, request, pk):
-        tarea = tareas[int(pk)]
+    def get(self, request, id_recurso, id_tarea):
+        tarea = tareas[int(id_tarea)]
+        recurso = recursos[int(id_recurso)]
+        return Response(self.get_data(tarea, recurso), template_name='tarea.html')
 
-        return Response(self.get_data(tarea), template_name='tarea.html')
-
-    def post(self, request, pk=None):
+    def post(self, request, id_recurso, id_tarea):
         try:
-            tarea = tareas[int(pk)]
+            tarea = tareas[int(id_tarea)]
         except KeyError:
             return Response(status=status.HTTP_404_NOT_FOUND)
         except ValueError:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
+        recurso = recursos[int(id_recurso)]
         serializer = TareaSerializer(
             data=request.data, instance=tarea)
         if serializer.is_valid():
             tarea = serializer.save()
             tareas[tarea.id] = tarea
-            return Response(self.get_data(tarea), template_name='tarea.html')
+            return Response(self.get_data(tarea, recurso), template_name='tarea.html')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

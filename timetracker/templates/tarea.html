@@ -12,14 +12,14 @@
         <dt>Fecha creacion</dt>
         <dd>{{ tarea.fecha_creacion }}</dd>
         <dt>Responsable</dt>
-        <dd>Aldana</dd>
+        <dd>{{ recurso.nombre }} {{ recurso.apellido }}</dd>
         <dt>Estado</dt>
         <dd>{{ tarea.estado }}</dd>
         <dt>Prioridad</dt>
         <dd>{{ tarea.prioridad }}</dd>
         <dt>Estimacion</dt>
         <dd>{{ tarea.estimacion }}</dd>
-        <dt>Horaa trabajadas</dt>
+        <dt>Horas trabajadas</dt>
         <dd>{{ tarea.horas_trabajadas|default_if_none:0 }}</dd>
 
       </dl>
@@ -37,7 +37,7 @@
             <h4 class="modal-title">Horas trabajadas</h4>
           </div>
             <div class="modal-body">
-                <form action="{% url 'tarea' tarea.id %}" method="POST" class="form" name="cargaHorasForm" id="cargaHorasForm">
+                <form action="{% url 'tarea' recurso.id tarea.id %}" method="POST" class="form" name="cargaHorasForm" id="cargaHorasForm">
                   {% render_form serializer %}
                 </form>
             </div>
