@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load static %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {% with url_name=request.resolver_match.url_name %}
+        <li{% if url_name == "recursos-list" %} class="active"{% endif %}>
+          <a href="{% url "recursos-list" %}">Menu Principal</a>
+        </li>
+        {% endwith %}
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -2,7 +2,10 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
-{% block page_title %}Bienvenido, {{ recurso.nombre }} {{ recurso.apellido }}{% endblock %}
+
+{% block page_header %}
+   <h1>Bienvenido, {{ recurso.nombre }} {{ recurso.apellido }}</h1>
+{% endblock page_header %}
 
 {% block content %}
     <h2> Tareas </h2>

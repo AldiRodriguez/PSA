@@ -2,8 +2,13 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 
+{% block page_header %}
+    <div class="text-left float-left">
+        <h1>Recursos</h1>
+    </div>
+{% endblock page_header %}
+
 {% block content %}
-    <h2> Recursos </h2>
     <ul>
     {% for recurso in recursos %}
     <li>

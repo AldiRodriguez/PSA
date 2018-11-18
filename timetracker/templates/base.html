@@ -10,19 +10,20 @@
     <title>PSA</title>
     {% block header_styles %}{% endblock header_styles %}
 </head>
-<body>
+<body style="padding-top: 70px">
 {% block body %}
+    {% include "navbar.html" %}
 
-  <div class="header">
-    <div class="container">
-      <h1>{% block page_title %}{% endblock page_title %}</h1>
+    <div class="header">
+        <div class="container">
+          {% block page_header %}{% endblock page_header %}
+        </div>
     </div>
-  </div>
 
-  <div class="container">
-    {% bootstrap_messages %}
-    {% block content %}{% endblock %}
-  </div>
+    <div class="container">
+        {% bootstrap_messages %}
+        {% block content %}{% endblock %}
+    </div>
 
 
 {% endblock body %}

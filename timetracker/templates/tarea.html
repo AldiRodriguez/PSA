@@ -6,7 +6,7 @@
 {% block page_title %}Tareas{% endblock %}
 
 {% block content %}
-    <h2>{{ tarea.id }} - {{ tarea.proyecto.nombre }}</h2>
+    <h2>{{ tarea.id }} - Proyecto {{ tarea.proyecto.nombre }}</h2>
     <div class="well">
       <dl class="dl-horizontal m-b-0">
         <dt>Fecha creacion</dt>
@@ -20,7 +20,7 @@
         <dt>Estimacion</dt>
         <dd>{{ tarea.estimacion }}</dd>
         <dt>Horaa trabajadas</dt>
-        <dd>{{ tarea.horas_trabajadas }}</dd>
+        <dd>{{ tarea.horas_trabajadas|default_if_none:0 }}</dd>
 
       </dl>
     </div>
