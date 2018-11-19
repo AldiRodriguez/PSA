@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -57,3 +58,10 @@ class TareaDetailView(APIView):
             tareas[tarea.id] = tarea
             return Response(self.get_data(tarea, recurso), template_name='tarea.html')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_tarea(request, id_tarea):
+
+    tarea = tareas[int(id_tarea)]
+    return Response(data=TareaSerializer(instance=tarea).data)

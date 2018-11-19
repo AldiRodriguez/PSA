@@ -37,7 +37,7 @@ class TareaSerializer(serializers.Serializer):
     fecha_inicio = serializers.DateTimeField(required=False)
     fecha_fin = serializers.DateTimeField(required=False)
     estimacion = serializers.IntegerField(required=False)
-    horas_trabajadas = serializers.IntegerField(required=False)
+    horas_trabajadas = serializers.IntegerField(required=False, max_value=24)
     prioridad = serializers.ChoiceField(choices=PRIORIDADES, required=False)
     estado = serializers.ChoiceField(choices=ESTADOS, required=False)
 
