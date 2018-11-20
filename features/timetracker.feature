@@ -7,3 +7,13 @@ Feature: timetracker
    	  When hacemos submit de 8 horas
       When obtenemos los datos de la tarea
       Then la tarea queda con 8 horas cargadas
+
+  Scenario: cargar horas negativas
+    Given un recurso y una tarea
+   	  When hacemos submit de -1 horas
+      Then el servidor tira error
+
+  Scenario: cargar mas de 24 horas
+    Given un recurso y una tarea
+   	  When hacemos submit de 25 horas
+      Then el servidor tira error

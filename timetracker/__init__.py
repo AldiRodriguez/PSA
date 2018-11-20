@@ -47,8 +47,8 @@ tareas = {1: Tarea(id=1,
 recursos = {
     1: Recurso(
         id=1,
-        nombre='Aldana',
-        apellido='Rodriguez',
+        nombre='Felipe',
+        apellido='Codeo',
         especialidad='Desarrollador',
         tareas=tareas.values()
     )

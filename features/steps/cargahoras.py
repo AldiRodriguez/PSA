@@ -35,3 +35,19 @@ def step_impl(context):
     assert (context.response['horas_trabajadas'] == 8)
 
 
+@when("hacemos submit de -1 horas")
+def step_impl(context):
+    url = 'http://localhost:8000/tareas/{0}/{1}'.format(context.recurso.id, context.tarea.id)
+    context.response = requests.post(url, data={'horas_trabajadas': -1})
+
+
+@then("el servidor tira error")
+def step_impl(context):
+
+    assert (context.response.status_code == 400)
+
+
+@when("hacemos submit de 25 horas")
+def step_impl(context):
+    url = 'http://localhost:8000/tareas/{0}/{1}'.format(context.recurso.id, context.tarea.id)
+    context.response = requests.post(url, data={'horas_trabajadas': 25})

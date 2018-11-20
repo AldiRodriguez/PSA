@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.contrib import messages
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
@@ -56,8 +56,10 @@ class TareaDetailView(APIView):
         if serializer.is_valid():
             tarea = serializer.save()
             tareas[tarea.id] = tarea
-            return Response(self.get_data(tarea, recurso), template_name='tarea.html')
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            messages.success(request, 'Se cargaron las horas correctamente')
+            return Response(self.get_data(tarea, recurso), template_name='tarea.html', status=status.HTTP_200_OK)
+        messages.error(request, 'Error al cargar horas')
+        return Response(self.get_data(tarea, recurso), template_name='tarea.html', status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
