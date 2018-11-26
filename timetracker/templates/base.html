@@ -3,6 +3,7 @@
 {% load bootstrap3 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +14,7 @@
 <body style="padding-top: 70px">
 {% block body %}
     {% include "navbar.html" %}
-
-    <div class="header">
+    <div class="header" style="padding-bottom:30px">
         <div class="container">
           {% block page_header %}{% endblock page_header %}
         </div>

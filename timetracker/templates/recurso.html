@@ -8,12 +8,32 @@
 {% endblock page_header %}
 
 {% block content %}
-    <h2> Tareas </h2>
-    <ul>
-    {% for tarea in tareas %}
-    <li>
-        <a href="{% url 'tarea' recurso.id tarea.id %}">{{ tarea.titulo }} - Proyecto: {{ tarea.proyecto.nombre }}</a>
-    </li>
-    {% endfor %}
-</ul>
+    <div class="text-center table-bordered" style="background-color: #4586e1; border-color: black" >
+        <h3> Tareas Pendientes</h3>
+    </div>
+    <table class="table table-striped table-bordered" style="border-color: black">
+        <thead></thead>
+        <thead>
+            <th>ID #</th>
+            <th>Titulo</th>
+            <th>Proyecto</th>
+            <th>Prioridad</th>
+            <th>Acceder</th>
+        </thead>
+        <tbody>
+        {% for tarea in tareas %}
+            <tr>
+                <td>{{ tarea.id }}</td>
+                <td>{{ tarea.titulo }}</td>
+                <td>{{ tarea.proyecto.nombre }}</td>
+                <td>{{ tarea.prioridad }}</td>
+                <td>
+                    <a href="{% url 'tarea' recurso.id tarea.id %}">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
